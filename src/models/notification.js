@@ -1,13 +1,13 @@
 const { DataTypes } = require("sequelize");
 const { sequelize } = require("./sequelize");
 
-module.exports = sequelize.define("notificaciones", {
-	description: {
-		type: DataTypes.STRING(250),
+module.exports = sequelize.define("notifications", {
+	name: {
+		type: DataTypes.STRING(100),
 		allowNull: false,
 	},
-	datenotification: {
-		type: DataTypes.DATE,
+	description: {
+		type: DataTypes.STRING(250),
 		allowNull: false,
 	},
 	isread: {

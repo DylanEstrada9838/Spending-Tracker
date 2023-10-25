@@ -7,6 +7,10 @@ module.exports = sequelize.define("users", {
 		allowNull: false,
 		unique: true,
 	},
+	username:{
+		type: DataTypes.STRING(150),
+		allowNull: false,
+	},
 	password: {
 		type: DataTypes.STRING(250),
 		allowNull: false

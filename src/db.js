@@ -1,40 +1,45 @@
 const { connect, sync } = require("./models/sequelize");
-const ExpenseCategory = require("./models/expensecategory");
-const ExpenseIncurred = require("./models/expenseincurred");
+const Category = require("./models/category");
+const Transaction = require("./models/transaction");
 const Notification = require("./models/notification");
-const PaymentMethod = require("./models/paymentmethod");
+const Method = require("./models/method");
 const User = require("./models/user");
-const UserSetting = require("./models/usersetting");
+const UserSetting = require("./models/userSetting");
+const {seed,seed2}= require("./seed.js")
 
 // "Un usuario registra muchas categorias de pago"
-User.hasMany(ExpenseCategory);
-ExpenseCategory.belongsTo(User);
+User.hasMany(Category);
+Category.belongsTo(User);
 
 // "Un usuario registra muchos gastos"
-User.hasMany(ExpenseIncurred);
-ExpenseIncurred.belongsTo(User);
+User.hasMany(Transaction);
+Transaction.belongsTo(User);
 
 // "Un usuario recibe muchas notificaciones"
 User.hasMany(Notification);
 Notification.belongsTo(User);
 
 // "Un usuario registra muchos metodos de pago"
-User.hasMany(PaymentMethod);
-PaymentMethod.belongsTo(User);
+User.hasMany(Method);
+Method.belongsTo(User);
 
 // "Un usuario registra determinadas configuraciones"
 User.hasMany(UserSetting);
 UserSetting.belongsTo(User); 
+UserSetting.belongsTo(Category)
+UserSetting.belongsTo(Method); ; 
 
 
 // "El gasto de un usuario tiene una categoria"
-ExpenseIncurred.belongsTo(ExpenseCategory);
+Transaction.belongsTo(Category);
 
 // "El gasto de un usuario tiene un metodo de pago"
-ExpenseIncurred.belongsTo(PaymentMethod);
+Transaction.belongsTo(Method);
+
+
 
 
 exports.initDatabase = async function () {
 	await connect();
 	await sync();
-};
+} ;

@@ -19,3 +19,5 @@ exports.findOneByEmail  = function (email) {
 exports.findById = function (id) {
 	return User.findByPk(id);
 };
+
+

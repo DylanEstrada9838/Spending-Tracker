@@ -1,16 +1,23 @@
 const Notification = require("../models/notification");
 
-exports.create = async function (data) {
-	const notification = await Notification.create(data);
-	return notification;
+exports.create = function (data) {
+	return Notification.create(data);
 };
 
-exports.findByUser  = function (userId) {
-	return Notification.findAll({
+
+exports.findById = function (id) {
+	return Notification.findByPk(id);
+};
+
+exports.updateById = async function (id, data) {
+	await Notification.update(data, {
 		where: {
-			userId,
-            isread: false
+			id,
 		},
-		order: [['datenotification', 'DESC']]
 	});
+};
+
+exports.deleteById = async function (id) {
+	const notification = await Notification.findByPk(id);
+	await notification.destroy();
 };

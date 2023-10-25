@@ -1,8 +1,8 @@
 const { DataTypes } = require("sequelize");
 const { sequelize } = require("./sequelize");
 
-module.exports = sequelize.define("expensesincurred", {
-	descriptionexpense: {
+module.exports = sequelize.define("transactions", {
+	description: {
 		type: DataTypes.STRING(150),
 		allowNull: false,
 	},
@@ -10,8 +10,4 @@ module.exports = sequelize.define("expensesincurred", {
         type: DataTypes.FLOAT,
 		allowNull: false,
     },
-    dateexpense: {
-        type: DataTypes.DATE,
-		allowNull: false, 
-    }
 });
