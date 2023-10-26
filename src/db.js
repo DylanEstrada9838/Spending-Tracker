@@ -4,8 +4,7 @@ const Transaction = require("./models/transaction");
 const Notification = require("./models/notification");
 const Method = require("./models/method");
 const User = require("./models/user");
-const UserSetting = require("./models/userSetting");
-const {seed,seed2}= require("./seed.js")
+const Setting = require("./models/setting");
 
 // "Un usuario registra muchas categorias de pago"
 User.hasMany(Category);
@@ -24,10 +23,8 @@ User.hasMany(Method);
 Method.belongsTo(User);
 
 // "Un usuario registra determinadas configuraciones"
-User.hasMany(UserSetting);
-UserSetting.belongsTo(User); 
-UserSetting.belongsTo(Category)
-UserSetting.belongsTo(Method); ; 
+User.hasMany(Setting);
+Setting.belongsTo(User); 
 
 
 // "El gasto de un usuario tiene una categoria"

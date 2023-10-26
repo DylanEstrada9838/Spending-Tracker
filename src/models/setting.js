@@ -1,12 +1,12 @@
 const { DataTypes } = require("sequelize");
 const { sequelize } = require("./sequelize");
 
-module.exports = sequelize.define("usersettings", {
+module.exports = sequelize.define("settings", {
 	type: {
 		type: DataTypes.STRING(150),
 		allowNull: false,
 	},
-	settingValue: {
+	value: {
 		type: DataTypes.STRING(250),
 		allowNull: null
 	}

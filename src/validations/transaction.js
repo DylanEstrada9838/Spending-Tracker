@@ -4,11 +4,15 @@ const joi = require("../middlewares/joi");
 exports.createTransactionSchema = Joi.object({
 	description: Joi.string().min(5).max(150).required(),
 	amount: Joi.number().required(),
+	categoryId: Joi.number().optional(),
+	methodId: Joi.number().optional(),
 });
 
 exports.updateTransactionSchema = Joi.object({
 	description: Joi.string().min(5).max(150).optional(),
 	amount: Joi.number().required().optional(),
+	categoryId: Joi.number().optional(),
+	methodId: Joi.number().optional()
 }).min(1)
 
 exports.paramsSchema = Joi.object({

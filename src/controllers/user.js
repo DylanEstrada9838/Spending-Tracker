@@ -1,5 +1,5 @@
 const { create, findOneByEmail } = require("../services/user");
-const {seed}= require("../seed")
+const {seed}= require("../seeds/userSeed")
 
 
 exports.createUser = async function (request, response) {
@@ -13,6 +13,7 @@ exports.createUser = async function (request, response) {
 		// Insert seed of default categories and methods
 		const newuser = await findOneByEmail(email);
 		seed(newuser.id)
+
 	}
 	else {
 		response.status(400).json({

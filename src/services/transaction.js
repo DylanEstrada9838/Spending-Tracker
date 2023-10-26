@@ -5,8 +5,12 @@ exports.create = function (data) {
 	return Transaction.create(data);
 };
 
-exports.findAll = function () {
-	return Transaction.findAll()
+exports.findAll = function (id) {
+	return Transaction.findAll({
+		where:{
+			userId:id
+		}
+	})
 };
 exports.findById = function (id) {
 	return Transaction.findByPk(id);

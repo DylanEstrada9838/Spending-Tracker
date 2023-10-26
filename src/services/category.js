@@ -4,8 +4,12 @@ exports.create = function (data) {
 	return Category.create(data);
 };
 
-exports.findAll = function () {
-	return Category.findAll()
+exports.findAll = function (id) {
+	return Category.findAll({
+		where:{
+			userId:id,
+		}
+	})
 };
 
 exports.findById = function (id) {
@@ -24,3 +28,11 @@ exports.deleteById = async function (id) {
 	const category = await Category.findByPk(id);
 	await category.destroy();
 };
+
+exports.findByName = function(name) {
+	return Category.findOne({
+		where:{
+			name,
+		}
+	})
+}

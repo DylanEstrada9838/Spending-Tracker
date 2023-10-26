@@ -10,7 +10,8 @@ exports.createTransaction = async function (request, response) {
 };
 
 exports.getTransactions = async function (request, response) {
-	const transactions = await findAll();
+	const {id}=request.user
+	const transactions = await findAll(id);
 	response.status(200).json(transactions);
 };
 

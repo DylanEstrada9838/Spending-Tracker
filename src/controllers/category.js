@@ -1,4 +1,4 @@
-const { create, findAll,findById,updateById,deleteById } = require("../services/category");
+const { create, findAll,findById,updateById,deleteById,findByName } = require("../services/category");
 
 
 
@@ -6,14 +6,27 @@ exports.createCategory = async function (request, response) {
 	const { name } = request.body;
 	const { id } = request.user;
 
-	const category = await create({ name, userId: id });
-	
+	const currentCategory = await findByName(name);
 
-	response.status(201).json(category);
+	if (!currentCategory) {
+		const category = await create({ name, userId: id });
+		response.status(201).json(category)
+		
+	}
+
+	else {
+		response.status(400).json({
+			message: "Category already created already created"
+		});
+	}
+
+	;
 };
 
+
 exports.getCategories = async function (request, response) {
-	const categories = await findAll();
+	const {id} = request.user
+	const categories = await findAll(id);
 	response.status(200).json(categories);
 };
 

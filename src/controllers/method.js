@@ -10,10 +10,10 @@ exports.createMethod = async function (request, response) {
 };
 
 exports.getMethods = async function (request, response) {
-	const methods = await findAll();
+	const {id}= request.user
+	const methods = await findAll(id);
 	response.status(200).json(methods);
 };
-
 exports.getMethod = async function (request, response) {
 	const { id } = request.params;
 	const method = await findById(id);

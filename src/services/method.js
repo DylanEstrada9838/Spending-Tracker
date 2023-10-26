@@ -5,8 +5,12 @@ exports.create = function (data) {
 };
 
 
-exports.findAll = function () {
-	return Method.findAll()
+exports.findAll = function (id) {
+	return Method.findAll({
+		where:{
+			userId:id,
+		}
+	})
 };
 
 exports.findById = function (id) {

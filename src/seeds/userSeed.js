@@ -1,9 +1,7 @@
-const Category = require("./models/category");
-const Transaction = require("./models/transaction");
-const Notification = require("./models/notification");
-const Method = require("./models/method");
-const User = require("./models/user");
-const UserSetting = require("./models/userSetting");
+const Category = require("../models/category");
+const Notification = require("../models/notification");
+const Method = require("../models/method");
+const Setting = require("../models/setting");
 
 exports.seed = async function (id) {
     const cat = (name,id)=>{
@@ -18,6 +16,13 @@ exports.seed = async function (id) {
         "userId":id
 	})
 }
+    const setting =(type,id)=>{
+        Setting.create({
+            "type":type,
+            "value":null,
+            "userId":id
+        })
+    }
 	await Promise.allSettled([
 	cat("Groceries",id),
     cat("Education",id),
@@ -28,9 +33,12 @@ exports.seed = async function (id) {
     cat("Shopping",id),
     cat("Savings",id),
     cat("Debts",id),
-	method("Cash"),
+	method("Cash",id),
     method("Debit Card",id),
-    method("Credit Card",id)
+    method("Credit Card",id),
+    setting("Daily Limit",id),
+    setting("Weekly Limit",id),
+    setting("Monthly Limit",id)
 	])
 }
 
