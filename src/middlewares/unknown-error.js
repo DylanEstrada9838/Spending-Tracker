@@ -5,4 +5,5 @@ module.exports = function (err, request, response, next) {
 		code: "ERR_UNKNOWN",
 		details: err,
 	});
+	
 };

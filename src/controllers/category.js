@@ -16,13 +16,10 @@ exports.createCategory = async function (request, response) {
 
 	else {
 		response.status(400).json({
-			message: "Category already created already created"
+			message: "Category already exist"
 		});
-	}
-
-	;
+	};
 };
-
 
 exports.getCategories = async function (request, response) {
 	const {id} = request.user
@@ -46,6 +43,17 @@ exports.updateCategory = async function (request, response) {
 
 exports.deleteCategory = async function (request, response) {
 	const { id } = request.params;
-	await deleteById(id);
-	response.status(204).end();
+
+	const currentCategory = await findById(id);
+
+	if (currentCategory) {
+		await deleteById(id);
+		response.status(204).end();
+	}
+	else {
+		response.status(400).json({
+			message: "Category does not exist"
+		});
+	};
+
 };

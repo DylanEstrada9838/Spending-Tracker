@@ -22,7 +22,6 @@ exports.updateNotification = async function (request, response) {
 	await updateById(id, { name,description,isread});
 	response.status(204).end();
 };
-
 exports.deleteNotification= async function (request, response) {
 	const { id } = request.params;
 	await deleteById(id);

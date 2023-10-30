@@ -1,6 +1,6 @@
 const { connect, sync } = require("./models/sequelize");
 const Category = require("./models/category");
-const Transaction = require("./models/transaction");
+const Expense = require("./models/expense");
 const Notification = require("./models/notification");
 const Method = require("./models/method");
 const User = require("./models/user");
@@ -11,8 +11,8 @@ User.hasMany(Category);
 Category.belongsTo(User);
 
 // "Un usuario registra muchos gastos"
-User.hasMany(Transaction);
-Transaction.belongsTo(User);
+User.hasMany(Expense);
+Expense.belongsTo(User);
 
 // "Un usuario recibe muchas notificaciones"
 User.hasMany(Notification);
@@ -28,10 +28,10 @@ Setting.belongsTo(User);
 
 
 // "El gasto de un usuario tiene una categoria"
-Transaction.belongsTo(Category);
+Expense.belongsTo(Category);
 
 // "El gasto de un usuario tiene un metodo de pago"
-Transaction.belongsTo(Method);
+Expense.belongsTo(Method);
 
 
 

@@ -1,14 +1,14 @@
 const Joi = require("joi");
 const joi = require("../middlewares/joi");
 
-exports.createTransactionSchema = Joi.object({
-	description: Joi.string().min(5).max(150).required(),
+exports.createExpenseSchema = Joi.object({
 	amount: Joi.number().required(),
-	categoryId: Joi.number().optional(),
-	methodId: Joi.number().optional(),
+	description: Joi.string().min(5).max(150).optional(),
+	categoryId: Joi.number().required(),
+	methodId: Joi.number().required(),
 });
 
-exports.updateTransactionSchema = Joi.object({
+exports.updateExpenseSchema = Joi.object({
 	description: Joi.string().min(5).max(150).optional(),
 	amount: Joi.number().required().optional(),
 	categoryId: Joi.number().optional(),

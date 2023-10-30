@@ -1,12 +1,20 @@
-const { create,findAll,findById,updateById,deleteById} = require("../services/method");
+const { create,findAll,findById,updateById,deleteById,findByName} = require("../services/method");
 
 exports.createMethod = async function (request, response) {
 	const { name } = request.body;
 	const { id } = request.user;
 
-	const method = await create({ name, userId: id });
+	const currentMethod= await findByName(name);
 
-	response.status(201).json(method);
+	if (!currentMethod) {
+		const method = await create({ name, userId: id });
+		response.status(201).json(method);
+	}
+	else {
+		response.status(400).json({
+			message: "Method already exist"
+		});
+	};
 };
 
 exports.getMethods = async function (request, response) {
@@ -14,6 +22,7 @@ exports.getMethods = async function (request, response) {
 	const methods = await findAll(id);
 	response.status(200).json(methods);
 };
+
 exports.getMethod = async function (request, response) {
 	const { id } = request.params;
 	const method = await findById(id);
@@ -30,7 +39,16 @@ exports.updateMethod = async function (request, response) {
 
 exports.deleteMethod = async function (request, response) {
 	const { id } = request.params;
-	await deleteById(id);
-	response.status(204).end();
+	const currentMethod = await findById(id);
+
+	if (currentMethod) {
+		await deleteById(id);
+		response.status(204).end();
+	}
+	else {
+		response.status(400).json({
+			message: "Method does not exist"
+		});
+	};
 };
 

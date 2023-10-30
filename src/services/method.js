@@ -29,3 +29,11 @@ exports.deleteById = async function (id) {
 	const method = await Method.findByPk(id);
 	await method.destroy();
 };
+
+exports.findByName = function(name) {
+	return Method.findOne({
+		where:{
+			name,
+		}
+	})
+}

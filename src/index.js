@@ -8,11 +8,19 @@ const app = express();
 
 app.use(express.json())
 
+const cors = require('cors');
+
+app.use(cors({
+	origin: '*',
+	methods: 'GET, POST, PUT, DELETE', // Specify the HTTP methods you need
+  allowedHeaders: ['Content-Type', 'Authorization'], // Add 'Content-Type' to the allowed headers
+  }));
+
 const userRouter = require("./routers/user");
 const authRouter = require("./routers/auth");
 const MethodRouter = require("./routers/method");
 const CategoryRouter = require("./routers/category");
-const TransactionRouter = require("./routers/transaction");
+const ExpenseRouter = require("./routers/expense");
 const SettingRouter = require("./routers/setting");
 
 
@@ -23,7 +31,7 @@ app.use("/users", userRouter);
 app.use("/auth", authRouter);
 app.use("/method", MethodRouter);
 app.use("/category", CategoryRouter);
-app.use("/transaction", TransactionRouter);
+app.use("/expense", ExpenseRouter);
 app.use("/setting", SettingRouter);
 
 // Manejo de errores

@@ -1,22 +1,22 @@
-const Transaction = require("../models/transaction");
+const Expense = require("../models/expense");
 
 
 exports.create = function (data) {
-	return Transaction.create(data);
+	return Expense.create(data);
 };
 
 exports.findAll = function (id) {
-	return Transaction.findAll({
+	return Expense.findAll({
 		where:{
 			userId:id
 		}
 	})
 };
 exports.findById = function (id) {
-	return Transaction.findByPk(id);
+	return Expense.findByPk(id);
 };
 exports.updateById = async function (id, data) {
-	await Transaction.update(data, {
+	await Expense.update(data, {
 		where: {
 			id,
 		},
@@ -24,6 +24,6 @@ exports.updateById = async function (id, data) {
 };
 
 exports.deleteById = async function (id) {
-	const transaction = await Transaction.findByPk(id);
-	await transaction.destroy();
+	const expense = await Expense.findByPk(id);
+	await expense.destroy();
 };
