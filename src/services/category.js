@@ -1,4 +1,5 @@
 const Category = require("../models/category");
+const Expense = require ("../models/expense")
 
 exports.create = function (data) {
 	return Category.create(data);
@@ -34,5 +35,13 @@ exports.findByName = function(name) {
 		where:{
 			name,
 		}
+	})
+}
+
+exports.findAllExpenses = function (id){
+	return Expense.count({
+		where:{
+			categoryId:id
+		},
 	})
 }

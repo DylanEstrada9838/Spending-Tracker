@@ -1,6 +1,5 @@
 const Expense = require("../models/expense");
 
-
 exports.create = function (data) {
 	return Expense.create(data);
 };
@@ -9,12 +8,25 @@ exports.findAll = function (id) {
 	return Expense.findAll({
 		where:{
 			userId:id
-		}
+		},
+		include:[
+			{
+				model:Category,
+				attributes:['name']
+			},
+			{
+				model:Method,
+				attributes:['name']
+			}
+		]
 	})
 };
+
+
 exports.findById = function (id) {
 	return Expense.findByPk(id);
 };
+
 exports.updateById = async function (id, data) {
 	await Expense.update(data, {
 		where: {

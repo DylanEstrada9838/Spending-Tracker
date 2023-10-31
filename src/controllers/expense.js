@@ -8,10 +8,11 @@ exports.createExpense = async function (request, response) {
 
 	response.status(201).json(expense);
 };
+
 exports.getExpenses = async function (request, response) {
 	const {id}=request.user
 	const expenses = await findAll(id);
-	response.status(200).json(Expenses);
+	response.status(200).json(expenses);
 };
 
 exports.getExpense = async function (request, response) {
