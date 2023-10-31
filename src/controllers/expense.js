@@ -1,4 +1,4 @@
-const { create, findAll,findById,updateById,deleteById } = require("../services/expense");
+const { create, findAll,findById,updateById,deleteById,calculateSumGroupByCategory } = require("../services/expense");
 
 exports.createExpense = async function (request, response) {
 	const { amount, description,  methodId, categoryId } = request.body;
@@ -43,3 +43,9 @@ exports.deleteExpense= async function (request, response) {
 		});
 	};
 };
+
+exports.getSumGroupByCategory= async function (request,response){
+	const {id}=request.user
+	const expenses = await calculateSumGroupByCategory(id);
+	response.status(200).json(expenses);
+}

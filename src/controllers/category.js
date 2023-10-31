@@ -13,7 +13,6 @@ exports.createCategory = async function (request, response) {
 		response.status(201).json(category)
 		
 	}
-
 	else {
 		response.status(400).json({
 			message: "Category already exist"

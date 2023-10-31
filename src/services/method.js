@@ -1,4 +1,5 @@
 const Method = require("../models/method");
+const Expense = require("../models/expense")
 
 exports.create = function (data) {
 	return Method.create(data);
@@ -35,5 +36,13 @@ exports.findByName = function(name) {
 		where:{
 			name,
 		}
+	})
+}
+
+exports.findAllExpenses = function (id){
+	return Expense.count({
+		where:{
+			methodId:id
+		},
 	})
 }

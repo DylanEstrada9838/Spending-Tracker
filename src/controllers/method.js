@@ -1,4 +1,4 @@
-const { create,findAll,findById,updateById,deleteById,findByName} = require("../services/method");
+const { create,findAll,findById,updateById,deleteById,findByName,findAllExpenses} = require("../services/method");
 
 exports.createMethod = async function (request, response) {
 	const { name } = request.body;
@@ -42,8 +42,15 @@ exports.deleteMethod = async function (request, response) {
 	const currentMethod = await findById(id);
 
 	if (currentMethod) {
-		await deleteById(id);
+		const expenses = await findAllExpenses(id)
+		if (expenses == 0){
+			await deleteById(id);
 		response.status(204).end();
+			} else {
+				response.status(400).json({
+				message: "Cannot delete a method with expenses created"
+			});
+			}
 	}
 	else {
 		response.status(400).json({

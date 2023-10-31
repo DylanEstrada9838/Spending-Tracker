@@ -1,4 +1,7 @@
 const Expense = require("../models/expense");
+const Category = require("../models/category")
+const Method = require("../models/method")
+const Sequelize = require("../models/sequelize")
 
 exports.create = function (data) {
 	return Expense.create(data);
@@ -6,10 +9,11 @@ exports.create = function (data) {
 
 exports.findAll = function (id) {
 	return Expense.findAll({
-		where:{
-			userId:id
-		},
-		include:[
+		
+		  where: {
+			userId: id,
+		  },
+		  include:[
 			{
 				model:Category,
 				attributes:['name']
@@ -18,10 +22,9 @@ exports.findAll = function (id) {
 				model:Method,
 				attributes:['name']
 			}
-		]
+		],		  
 	})
 };
-
 
 exports.findById = function (id) {
 	return Expense.findByPk(id);
@@ -34,8 +37,26 @@ exports.updateById = async function (id, data) {
 		},
 	});
 };
-
 exports.deleteById = async function (id) {
 	const expense = await Expense.findByPk(id);
 	await expense.destroy();
 };
+
+exports.calculateSumGroupByCategory = function (id){
+	return Expense.findAll({
+		attributes: [
+			'CategoryId',
+			[Sequelize.sequelize.fn('SUM', Sequelize.sequelize.col('amount')), 'totalAmount'],
+		  ],
+		  include:[
+			{
+				model:Category,
+				attributes:['name']
+			},
+		],
+		  where: {
+			userId: id,
+		  },
+		  group: ['CategoryId'],
+	  });
+}  
