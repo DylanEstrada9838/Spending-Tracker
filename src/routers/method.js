@@ -9,7 +9,7 @@ const { get } = require("express/lib/response");
 router.post("/", jwtValidator, joiValidator.body(createMethodSchema), createMethod);
 
 router.get("/", jwtValidator, getMethods);
-router.get("/:id",jwtValidator,getMethod)
+router.get("/:id",jwtValidator,joiValidator.params(paramsSchema),getMethod)
 router.put("/:id",jwtValidator,joiValidator.params(paramsSchema), joiValidator.body(updateMethodSchema),updateMethod)
 router.delete("/:id",jwtValidator,joiValidator.params(paramsSchema),deleteMethod)
 

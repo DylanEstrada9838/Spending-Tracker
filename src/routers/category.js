@@ -8,7 +8,7 @@ const { createCategory,getCategories,getCategory,updateCategory,deleteCategory} 
 router.post("/", jwtValidator, joiValidator.body(createCategorySchema), createCategory);
 
 router.get("/", jwtValidator, getCategories);
-router.get("/:id",jwtValidator,getCategory)
+router.get("/:id",jwtValidator,joiValidator.params(paramsSchema),getCategory)
 router.put("/:id",jwtValidator,joiValidator.params(paramsSchema), joiValidator.body(updateCategorySchema),updateCategory)
 router.delete("/:id",jwtValidator,joiValidator.params(paramsSchema),deleteCategory)
 

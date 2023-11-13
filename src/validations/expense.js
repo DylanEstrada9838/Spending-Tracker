@@ -8,8 +8,8 @@ exports.createExpenseSchema = Joi.object({
 	methodId: Joi.number().required(),
 });
 exports.updateExpenseSchema = Joi.object({
-	description: Joi.string().min(5).max(150).optional(),
-	amount: Joi.number().required().optional(),
+	description: Joi.string().min(0).max(150).optional(),
+	amount: Joi.number().optional(),
 	categoryId: Joi.number().optional(),
 	methodId: Joi.number().optional()
 }).min(1)

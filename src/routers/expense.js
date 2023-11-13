@@ -3,14 +3,15 @@ const router = express.Router();
 const jwtValidator = require("../middlewares/passport");
 const joiValidator = require("../middlewares/joi");
 const { createExpenseSchema,updateExpenseSchema,paramsSchema } = require("../validations/expense");
-const { createExpense,getExpenses,getExpense,updateExpense,deleteExpense,getSumGroupByCategory } = require("../controllers/expense");
+const { createExpense,getExpenses,getExpense,updateExpense,deleteExpense,getSumGroupByCategory,getSumGroupByMethod } = require("../controllers/expense");
 
 
 router.post("/", jwtValidator, joiValidator.body(createExpenseSchema), createExpense);
 
 router.get("/", jwtValidator, getExpenses);
-router.get("/group", jwtValidator, getSumGroupByCategory);
-router.get("/:id",jwtValidator,getExpense)
+router.get("/category", jwtValidator, getSumGroupByCategory);
+router.get("/method",jwtValidator,getSumGroupByMethod)
+router.get("/:id",jwtValidator,joiValidator.params(paramsSchema),getExpense)
 router.put("/:id",jwtValidator,joiValidator.params(paramsSchema), joiValidator.body(updateExpenseSchema),updateExpense)
 router.delete("/:id",jwtValidator,joiValidator.params(paramsSchema),deleteExpense)
 

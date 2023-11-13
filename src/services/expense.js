@@ -60,3 +60,23 @@ exports.calculateSumGroupByCategory = function (id){
 		  group: ['CategoryId'],
 	  });
 }  
+
+exports.calculateSumGroupByMethod = function (id){
+	return Expense.findAll({
+		attributes: [
+			'MethodId',
+			[Sequelize.sequelize.fn('SUM', Sequelize.sequelize.col('amount')), 'totalAmount'],
+		  ],
+		  include:[
+			{
+				model:Method,
+				attributes:['name']
+			},
+		],
+		  where: {
+			userId: id,
+		  },
+		  group: ['MethodId'],
+	  });
+}  
+
