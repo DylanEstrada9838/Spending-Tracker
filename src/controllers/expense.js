@@ -22,10 +22,10 @@ exports.getExpense = async function (request, response) {
 };
 
 exports.updateExpense = async function (request, response) {
-	const { description,amount,categoryId,methodId } = request.body;
+	const { description,amount,date,categoryId,methodId } = request.body;
 	const { id } = request.params;
 
-	await updateById(id, { description,amount,categoryId,methodId});
+	await updateById(id, { description,amount,date,categoryId,methodId});
 	response.status(204).end();
 };
 

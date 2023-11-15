@@ -22,7 +22,8 @@ exports.findAll = function (id) {
 				model:Method,
 				attributes:['name']
 			}
-		],		  
+		],	
+		order: [['date', 'DESC']]	  
 	})
 };
 
