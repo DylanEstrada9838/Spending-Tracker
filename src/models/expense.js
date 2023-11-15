@@ -11,4 +11,9 @@ module.exports = sequelize.define("expenses", {
 		type: DataTypes.STRING(150),
 		allowNull: true,
 	},
+	date: {
+        type: DataTypes.DATE,
+		allowNull: false, 
+		defaultValue: DataTypes.NOW,
+    },
 });

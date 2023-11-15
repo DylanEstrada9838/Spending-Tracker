@@ -1,10 +1,10 @@
 const { create, findAll,findById,updateById,deleteById,calculateSumGroupByCategory, calculateSumGroupByMethod } = require("../services/expense");
 
 exports.createExpense = async function (request, response) {
-	const { amount, description,  methodId, categoryId } = request.body;
+	const { amount, description, date, methodId, categoryId } = request.body;
 	const { id } = request.user;
 
-	const expense = await create({ amount, description,  methodId, categoryId, userId: id });
+	const expense = await create({ amount, description,date,  methodId, categoryId, userId: id });
 
 	response.status(201).json(expense);
 };
