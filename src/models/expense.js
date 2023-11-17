@@ -15,4 +15,8 @@ module.exports = sequelize.define("expenses", {
         type: DataTypes.DATE,
 		allowNull: false, 
     },
+	month:{
+		type:DataTypes.INTEGER,
+		allowNull:false,
+	}
 });

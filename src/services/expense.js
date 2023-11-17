@@ -2,6 +2,7 @@ const Expense = require("../models/expense");
 const Category = require("../models/category")
 const Method = require("../models/method")
 const Sequelize = require("../models/sequelize")
+const { Op } = require('sequelize');
 
 exports.create = function (data) {
 	return Expense.create(data);
@@ -78,6 +79,55 @@ exports.calculateSumGroupByMethod = function (id){
 			userId: id,
 		  },
 		  group: ['MethodId'],
+	  });
+}  
+
+exports.calculateSumGroupByCategoryMonth = function (id,year,month){
+	return Expense.findAll({
+		attributes: [
+			'CategoryId',
+			[Sequelize.sequelize.fn('SUM', Sequelize.sequelize.col('amount')), 'totalAmount'],
+		  ],
+		  include:[
+			{
+				model:Category,
+				attributes:['name']
+			},
+		],
+		  where: {
+			userId: id,
+			date: {
+				[Op.gte]: new Date(year, month - 1, 1),
+				[Op.lt]: new Date(year, month, 1)
+  			}
+		  },
+		  group: ['CategoryId'],
+	  });
+}  
+exports.calculateSumGroupByCategoryMonth1 = function (id,year){
+	const startDate = new Date(`${year}-01-01T00:00:00.000Z`);
+  const endDate = new Date(`${Number(year) + 1}-01-01T00:00:00.000Z`);
+	return Expense.findAll({
+		attributes: [
+			'CategoryId',
+			'month',
+			[Sequelize.sequelize.fn('SUM', Sequelize.sequelize.col('amount')), 'totalAmount'],
+			
+		  ],
+		  include:[
+			{
+				model:Category,
+				attributes:['name']
+			},
+		],
+		  where: {
+			userId: id,
+			date: {
+				[Op.gte]: startDate,
+        		[Op.lt]: endDate
+  			}
+		  },
+		  group: ['CategoryId','month'],
 	  });
 }  
 

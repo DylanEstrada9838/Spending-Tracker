@@ -6,6 +6,7 @@ const Method = require("./models/method");
 const User = require("./models/user");
 const Setting = require("./models/setting");
 
+
 // "Un usuario registra muchas categorias de pago"
 User.hasMany(Category);
 Category.belongsTo(User);
@@ -32,7 +33,6 @@ Expense.belongsTo(Category);
 
 // "El gasto de un usuario tiene un metodo de pago"
 Expense.belongsTo(Method);
-
 
 
 
