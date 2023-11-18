@@ -105,8 +105,9 @@ exports.calculateSumGroupByCategoryMonth = function (id,year,month){
 	  });
 }  
 exports.calculateSumGroupByCategoryMonth1 = function (id,year){
-	const startDate = new Date(`${year}-01-01T00:00:00.000Z`);
-  const endDate = new Date(`${Number(year) + 1}-01-01T00:00:00.000Z`);
+	const parsedYear = parseInt(year);
+	const startDate = new Date(`${parsedYear}-01-01T00:00:00.000Z`);
+  const endDate = new Date(`${Number(parsedYear) + 1}-01-01T00:00:00.000Z`);
 	return Expense.findAll({
 		attributes: [
 			'CategoryId',
@@ -129,5 +130,6 @@ exports.calculateSumGroupByCategoryMonth1 = function (id,year){
 		  },
 		  group: ['CategoryId','month'],
 	  });
+
 }  
 

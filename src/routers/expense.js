@@ -11,8 +11,7 @@ router.post("/", jwtValidator, joiValidator.body(createExpenseSchema), createExp
 router.get("/", jwtValidator, getExpenses);
 router.get("/category", jwtValidator, getSumGroupByCategory);
 router.get("/method",jwtValidator,getSumGroupByMethod)
-router.get("/category/months",jwtValidator,getSumGroupByCategoryMonth1)
-router.get("/category/:month",jwtValidator,getSumGroupByCategoryMonth)
+router.get("/category/:year",jwtValidator,getSumGroupByCategoryMonth1)
 router.get("/:id",jwtValidator,joiValidator.params(paramsSchema),getExpense)
 router.put("/:id",jwtValidator,joiValidator.params(paramsSchema), joiValidator.body(updateExpenseSchema),updateExpense)
 router.delete("/:id",jwtValidator,joiValidator.params(paramsSchema),deleteExpense)

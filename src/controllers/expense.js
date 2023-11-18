@@ -65,7 +65,8 @@ exports.getSumGroupByCategoryMonth= async function (request,response){
 }
 exports.getSumGroupByCategoryMonth1= async function (request,response){
 	const {id}=request.user
-	const {year} = request.body
+	const {year} = request.params
 	const expenses = await calculateSumGroupByCategoryMonth1(id,year);
 	response.status(200).json(expenses);
+
 }
