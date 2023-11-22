@@ -12,7 +12,7 @@ exports.login = async function (request, response) {
 		if (e instanceof AuthException) {
 			return response.status(400).json({
 				code: "ERR_AUTH",
-				message: "Email o contraseña incorrectos",
+				message: "Email or password is invalid",
 			});
 		}
 		

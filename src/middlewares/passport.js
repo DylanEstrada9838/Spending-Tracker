@@ -14,7 +14,7 @@ passport.use(
 			const user = await findById(id);
 
 			if (!user) {
-				return done({ message: "El usuario no existe en base de datos" });
+				return done({ message: "User does not exist in database" });
 			}
 
 			done(null, user);

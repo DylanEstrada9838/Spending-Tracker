@@ -1,4 +1,4 @@
-const { create, findAll,findById,updateById,deleteById,calculateSumGroupByCategory, calculateSumGroupByMethod,calculateSumGroupByCategoryMonth,calculateSumGroupByCategoryMonth1 } = require("../services/expense");
+const { create, findAll,findById,updateById,deleteById,calculateSumGroupByCategory, calculateSumGroupByMethod,calculateSumGroupByCategoryMonth,calculateSumGroupByCategoryMonth1,totalExpenseByYear } = require("../services/expense");
 
 exports.createExpense = async function (request, response) {
 	const { amount, description, date, methodId, categoryId } = request.body;
@@ -46,7 +46,8 @@ exports.deleteExpense= async function (request, response) {
 
 exports.getSumGroupByCategory= async function (request,response){
 	const {id}=request.user
-	const expenses = await calculateSumGroupByCategory(id);
+	const {year}= request.params
+	const expenses = await calculateSumGroupByCategory(id,year);
 	response.status(200).json(expenses);
 }
 
@@ -67,6 +68,14 @@ exports.getSumGroupByCategoryMonth1= async function (request,response){
 	const {id}=request.user
 	const {year} = request.params
 	const expenses = await calculateSumGroupByCategoryMonth1(id,year);
+	response.status(200).json(expenses);
+
+}
+exports.getTotalExpenseByYear= async function (request,response){
+	const {id}=request.user
+	const {year} = request.params
+	console.log(year)
+	const expenses = await totalExpenseByYear(id,year);
 	response.status(200).json(expenses);
 
 }

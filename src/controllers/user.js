@@ -17,6 +17,7 @@ exports.createUser = async function (request, response) {
 	}
 	else {
 		response.status(400).json({
+			code:"ERR_USER",
 			message: "User with email already created"
 		});
 	}
