@@ -117,6 +117,7 @@ exports.calculateSumGroupByCategoryMonth = function (id, year, month) {
       },
     },
     group: ["CategoryId"],
+   
   });
 };
 exports.calculateSumGroupByCategoryMonth1 = function (id, year) {
@@ -146,6 +147,7 @@ exports.calculateSumGroupByCategoryMonth1 = function (id, year) {
       },
     },
     group: ["CategoryId", "month"],
+    order: [['totalAmount', 'ASC']]
   });
 };
 
